@@ -1,8 +1,8 @@
-const createUser = (req, res) => {
+const create = (req, res) => {
     res.send('<h1> Create User </h1>')
 } 
 
 
 module.exports = {
-    createUser
+    create
 }
