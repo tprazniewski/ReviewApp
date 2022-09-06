@@ -1,7 +1,9 @@
 const express = require('express');
-const app = express();
 const userRouter = require('./routes/user')
+const app = express();
 
+//Wee need this middleware to parse json file we use in post method
+app.use(express.json())
 app.use('/api/user', userRouter)
 
 app.listen(3000, () => {
