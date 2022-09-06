@@ -1,7 +1,7 @@
 const express = require('express');
 const userRouter = require('./routes/user')
 const app = express();
-require('./db/index')
+require('./db')
 
 //We need this middleware to parse chunk of data to a redable format
 app.use(express.json())
