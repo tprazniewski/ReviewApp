@@ -1,7 +1,7 @@
 const express = require('express');
 // const { userValidator, validate } = require('../../middlewares/validator');
 const { check, validationResult } = require('express-validator'); 
-const { create, verifyEmail } = require('../controllers/user');
+const { create, verifyEmail, resendEmailVerificationToken } = require('../controllers/user');
 
 const router = express.Router()
 
@@ -11,5 +11,6 @@ router.get('/', (req, res) => {
 
 router.post('/create', create)
 router.post('/verify-email', verifyEmail)
+router.post('/resend-email-verification-token', resendEmailVerificationToken)
 
 module.exports = router;
