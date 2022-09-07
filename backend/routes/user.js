@@ -1,7 +1,7 @@
 const express = require('express');
 // const { userValidator, validate } = require('../../middlewares/validator');
 const { check, validationResult } = require('express-validator'); 
-const { create } = require('../controllers/user');
+const { create, verifyEmail } = require('../controllers/user');
 
 const router = express.Router()
 
@@ -10,5 +10,6 @@ router.get('/', (req, res) => {
 })
 
 router.post('/create', create)
+router.post('/verify-email', verifyEmail)
 
 module.exports = router;
