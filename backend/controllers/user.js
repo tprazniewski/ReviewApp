@@ -126,9 +126,10 @@ const resendEmailVerificationToken = async (req,res) => {
       transport.sendMail({
         from: ' verification',
         to: user.email,
-        subject: 'Welcome  Email',
+        subject: 'Email Verification',
         html: `
-        <h1> Welcome to our app </h1>
+        <p> Your OTP </p>
+        <h1> ${OTP} </h1>
         `
       })
     res.json({ message: 'New OTP has been sent to your registered email'})
