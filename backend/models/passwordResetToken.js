@@ -35,4 +35,4 @@ passwordResetTokenSchema.methods.compaireToken = async function (token) {
    const result =  await bcrypt.compare(token, this.token)
    return result;
  }
-module.exports = mongoose.model( "passwordResetTokenSchema" , passwordResetTokenSchema)
+module.exports = mongoose.model( "passwordResetToken" , passwordResetTokenSchema)
