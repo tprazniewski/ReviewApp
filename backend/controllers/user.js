@@ -53,7 +53,7 @@ const verifyEmail = async (req, res) => {
      const token = await emailVerificationToken.findOne({ owner: userId })
      if (!token) return res.json({ error: 'token not found!'})
     
-    const isMatched = await token.compaireToken(OTP)
+    const isMatched = await token.compareToken(OTP)
     // if(!isMatched) return res.json({ error: 'please submit a valid OTP!'})
     if(!isMatched) return sendError(res,'please submit a valid OTP!' )
 
@@ -146,10 +146,14 @@ const forgetPassword = async (req,res) =>{
   res.json({message: "link sent to your email"})
 }
 
+const sendResetPasswordtokenStatus = (req,res) => {
+  res.json({valid: true})
+}
 
 module.exports = {
     create,
     verifyEmail,
     resendEmailVerificationToken,
-    forgetPassword
+    forgetPassword,
+    sendResetPasswordtokenStatus
 }

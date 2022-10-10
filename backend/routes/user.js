@@ -1,7 +1,8 @@
 const express = require('express');
 // const { userValidator, validate } = require('../../middlewares/validator');
 const { check, validationResult } = require('express-validator'); 
-const { create, verifyEmail, resendEmailVerificationToken, forgetPassword } = require('../controllers/user');
+const { create, verifyEmail, resendEmailVerificationToken, forgetPassword, sendResetPasswordtokenStatus } = require('../controllers/user');
+const {isValidPasswordResetToken} = require('../middlewares/user')
 
 const router = express.Router()
 
@@ -13,5 +14,6 @@ router.post('/create', create)
 router.post('/verify-email', verifyEmail)
 router.post('/resend-email-verification-token', resendEmailVerificationToken)
 router.post('/forget-password', forgetPassword)
+router.post('/verify-password-reset-token', isValidPasswordResetToken, sendResetPasswordtokenStatus)
 
 module.exports = router;

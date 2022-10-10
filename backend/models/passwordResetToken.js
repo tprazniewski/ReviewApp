@@ -30,7 +30,7 @@ passwordResetTokenSchema.pre("save", async function (next) {
 })
 
 // Create a new method called compaireToken
-passwordResetTokenSchema.methods.compaireToken = async function (token) {
+passwordResetTokenSchema.methods.compareToken = async function (token) {
     // token from the user and hashed token from DB
    const result =  await bcrypt.compare(token, this.token)
    return result;
