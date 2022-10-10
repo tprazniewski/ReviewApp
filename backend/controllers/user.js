@@ -2,6 +2,7 @@ const User = require('../models/user')
 const emailVerificationToken = require('../models/emailVerificationToken')
 const passwordResetToken = require('../models/passwordResetToken')
 const crypto = require('crypto')
+const jwt = require('jsonwebtoken')
 
 const { isValidObjectId } = require('mongoose');
 const { generateOTP, generateMailTransporter } = require('../utils/mail');
@@ -150,10 +151,16 @@ const sendResetPasswordtokenStatus = (req,res) => {
   res.json({valid: true})
 }
 
+
+const signIn = (req,res) => {
+  const {email,password} = req.body
+  
+}
+
 module.exports = {
     create,
     verifyEmail,
     resendEmailVerificationToken,
     forgetPassword,
     sendResetPasswordtokenStatus
-}
+  }
