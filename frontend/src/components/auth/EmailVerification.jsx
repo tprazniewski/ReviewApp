@@ -15,7 +15,10 @@ export default function EmailVerification() {
   //e.target.value
   const handleOtpChange= ({target}, index) => {
     const {value} =target
-    console.log(value)
+    const newOtp = [...otp]
+    newOtp[index] = value.substring(value.length-1, value.length)
+    setOtp([...newOtp])
+    console.log('value inside handler',value)
     setActiveOtpIndex(index+1)
     // setOtp([value])
   }
@@ -23,6 +26,8 @@ export default function EmailVerification() {
   useEffect(()=> {
     inputRef.current?.focus()
   },[activeOtpIndex])
+
+console.log('inputRef!',inputRef)
 
   return (
     <div className="fixed inset-0 bg-primary -z-10 flex justify-center items-center">
