@@ -3,6 +3,8 @@ import Container from '../Container'
 import Title from '../form/Title'
 import FormInput from '../form/FormInput'
 import Submit from '../form/Submit'
+import {Link} from 'react-router-dom'
+import CustomLink from '../CustomLink'
 
 export default function Signup() {
   return (
@@ -16,8 +18,9 @@ export default function Signup() {
                 <Submit value ='Sign up'/>
                 
                 <div className='flex justify-between'>
-                    <a className='text-dark-subtle hover:text-white transition ' href='#'> Forget Password</a>
-                    <a className='text-dark-subtle hover:text-white transition' href='#'> Sign in</a>
+                    <CustomLink to='/auth/forget-password'> ForgetPassword</CustomLink>
+                    <CustomLink to='/auth/signin'>Sign in</CustomLink>
+
                 </div>
             </form> 
         </Container>
