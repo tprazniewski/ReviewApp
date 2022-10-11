@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import CustomLink from "../CustomLink";
 import Container from "../Container";
 import FormInput from "../form/FormInput";
@@ -9,6 +9,21 @@ const OTP_LENGTH = 6;
 
 export default function EmailVerification() {
   const [otp, setOtp] = useState(new Array(OTP_LENGTH).fill(""));
+  const [activeOtpIndex, setActiveOtpIndex] =useState(0)
+
+  const inputRef = useRef()
+  //e.target.value
+  const handleOtpChange= ({target}, index) => {
+    const {value} =target
+    console.log(value)
+    setActiveOtpIndex(index+1)
+    // setOtp([value])
+  }
+
+  useEffect(()=> {
+    inputRef.current?.focus()
+  },[activeOtpIndex])
+
   return (
     <div className="fixed inset-0 bg-primary -z-10 flex justify-center items-center">
       <Container>
@@ -24,8 +39,12 @@ export default function EmailVerification() {
             {otp.map((_, index) => {
               return (
                 <input
+                  ref={activeOtpIndex=== index ? inputRef : null}
+                  key={index}
                   type="number"
-                  className="w-12 h-12 border-2 rounded border-dark-subtle focus:border-white bg-transparent outline-none text-center text-white text-xl "
+                  value={otp[index] || ''}
+                  onChange = {(e) => handleOtpChange(e,index)}
+                  className="w-12 h-12 border-2 rounded border-dark-subtle focus:border-white bg-transparent outline-none text-center text-white text-xl .spin-button-none:"
                 ></input>
               );
             })}
