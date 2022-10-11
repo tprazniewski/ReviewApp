@@ -1,15 +1,22 @@
 import React from 'react'
 import Container from '../Container'
+import Title from '../form/Title'
+import FormInput from '../form/FormInput'
+import Submit from '../form/Submit'
 
 export default function Signin() {
   return (
     <div className='fixed inset-0 bg-primary -z-10 flex justify-center items-center'>
         <Container>
-            <form className='bg-secondary rounded p-6 w-72'>
-                <h1 className='text-xl text-white font-semibold text-center'> Sign In</h1>
-                <div className='flex flex-col-reverse'>
-                    <input id="email" type="text" className='bg-transparent rounded border-2 border-dark-subtle w-full text-lg outline-none focus:border-white p-1 text-white peer transition' placeholder="test@email.com"/>
-                    <label htmlFor='email' className='font-semibold text-dark-subtle peer-focus:text-white transition self-start ' >Email</label>
+            <form className='bg-secondary rounded p-6 w-72 space-y-6'>
+                <Title> Sign in</Title>
+                <FormInput label='Email' placeholder='Sanders@email.com' name='email'/>
+                <FormInput label='Password' placeholder='********' name='password'/>
+                <Submit value ='Sign In'/>
+                
+                <div className='flex justify-between'>
+                    <a className='text-dark-subtle hover:text-white transition ' href='#'> Forget Password</a>
+                    <a className='text-dark-subtle hover:text-white transition' href='#'> Sign Up</a>
                 </div>
             </form> 
         </Container>
