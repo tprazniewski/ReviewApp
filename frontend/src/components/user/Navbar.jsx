@@ -1,10 +1,11 @@
 import React from 'react'
 import {BsEmojiSunglasses} from 'react-icons/bs'
+import Container from '../Container'
 
 export default function Navbar() {
   return (
-    <div className="bg-secondary">
-        <div className="max-w-screen-xl mx-auto p-2"> 
+    <div className="bg-secondary shadow-sm shadow-gray-500">
+        <Container className="p-2"> 
             <div className='flex justify-between items-center'>
                 <img src="./logo.png" alt="logo Img" className='h-10'/>
                 <ul className='flex items-center space-x-2'>
@@ -19,7 +20,7 @@ export default function Navbar() {
                     <li className='text-white font-semibold text-lg'>Login</li>
                 </ul>
             </div>
-        </div>
+        </Container>
     </div>
 
   )
