@@ -5,9 +5,9 @@ import FormInput from "../form/FormInput";
 import Title from "../form/Title";
 import Submit from "../form/Submit";
 
+
 const OTP_LENGTH = 6;
 let currentOTPIndex;
-
 export default function EmailVerification() {
   const [otp, setOtp] = useState(new Array(OTP_LENGTH).fill(""));
   const [activeOtpIndex, setActiveOtpIndex] =useState(0)
