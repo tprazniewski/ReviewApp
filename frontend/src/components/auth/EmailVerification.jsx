@@ -12,15 +12,27 @@ export default function EmailVerification() {
   const [activeOtpIndex, setActiveOtpIndex] =useState(0)
 
   const inputRef = useRef()
+  const focusNextInputField = index =>setActiveOtpIndex(index+1)
+  const focusPreviousInputField = index =>{
+    let nexIndex;
+    const diff = index-1
+    nexIndex= diff !== 0 ? diff : 0
+    setActiveOtpIndex(nexIndex)
+  }
+
+
   //e.target.value
   const handleOtpChange= ({target}, index) => {
     const {value} =target
     const newOtp = [...otp]
     newOtp[index] = value.substring(value.length-1, value.length)
-    setOtp([...newOtp])
     console.log('value inside handler',value)
-    setActiveOtpIndex(index+1)
+    
+    if(!value) focusPreviousInputField(index)
+    else 
     // setOtp([value])
+    focusNextInputField(index)
+    setOtp([...newOtp])
   }
 
   useEffect(()=> {
