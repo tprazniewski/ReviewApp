@@ -9,19 +9,18 @@ export default function ThemeProvider({ children }) {
   const darkTheme = 'dark'
 
   const toggleTheme = () => {
-    const oldTheme = localStorage.getItem('theme')
+    const oldTheme = getTheme()
     const newTheme = oldTheme === defaultTheme ? darkTheme : defaultTheme
-    document.documentElement.classList.add(newTheme)
-    document.documentElement.classList.remove(oldTheme)
+    updateTheme(newTheme, oldTheme)
+
     // console.log(document.documentElement)
-    localStorage.setItem('theme', newTheme)
   }
 
   useEffect(()=> {
     
-    const theme = localStorage.getItem('theme')
-    if(!theme) document.documentElement.classList.add(defaultTheme)
-    else document.documentElement.classList.add(theme)
+    const theme = getTheme()
+    if(!theme) updateTheme(defaultTheme)
+    else updateTheme(theme)
   },[])
 
   return( 
@@ -29,4 +28,12 @@ export default function ThemeProvider({ children }) {
     {children}
     </ThemeContext.Provider>
   )
+}
+
+const getTheme = () => localStorage.getItem('theme')
+const updateTheme = (theme, themeToRemove) => {
+  if(themeToRemove) document.documentElement.classList.remove(themeToRemove)
+  document.documentElement.classList.add(theme)
+  // console.log(document.documentElement)
+  localStorage.setItem('theme', theme)
 }
