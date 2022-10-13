@@ -4,6 +4,8 @@ import Title from '../form/Title'
 import FormInput from '../form/FormInput'
 import Submit from '../form/Submit'
 import CustomLink from '../CustomLink'
+import { commonModalClasses } from '../../utils/theme'
+import FormContainer from '../form/FormContainer'
 // import { ThemeContext } from '../../context/ThemeProvider'
 // import { useTheme } from '../../hooks'
 
@@ -14,9 +16,10 @@ export default function Signin() {
   
 
   return (
-    <div className='fixed inset-0 dark:bg-primary -z-10 flex justify-center items-center'>
+    // <div className='fixed inset-0 dark:bg-primary bg-white -z-10 flex justify-center items-center'>
+      <FormContainer>
         <Container>
-            <form className='dark:bg-secondary rounded p-6 w-72 space-y-6'>
+            <form className={commonModalClasses + ' w-72'}>
                 <Title> Sign in</Title>
                 <FormInput label='Email' placeholder='Sanders@email.com' name='email'/>
                 <FormInput label='Password' placeholder='********' name='password'/>
@@ -29,6 +32,7 @@ export default function Signin() {
                 </div>
             </form> 
         </Container>
-    </div>
+      </FormContainer>
+    // </div>
   )
 }

@@ -2,21 +2,24 @@ import React from "react";
 import { BsEmojiSunglasses } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import Container from "../Container";
-import {useTheme} from '../../hooks'
+import { useTheme } from "../../hooks";
 
 export default function Navbar() {
-  const {toggleTheme} = useTheme()
+  const { toggleTheme } = useTheme();
 
   return (
     <div className="bg-secondary shadow-sm shadow-gray-500">
       <Container className="p-2">
         <div className="flex justify-between items-center">
-          <Link to='/'>
+          <Link to="/">
             <img src="./logo.png" alt="logo Img" className="h-10" />
           </Link>
           <ul className="flex items-center space-x-2">
-            <li> 
-              <button onClick={toggleTheme} className="bg-dark-subtle p-1 rounded">
+            <li>
+              <button
+                onClick={toggleTheme}
+                className="dark:bg-white bg-dark-subtle p-1 rounded"
+              >
                 <BsEmojiSunglasses className="text-secondary" size={24} />
               </button>
             </li>
@@ -27,9 +30,13 @@ export default function Navbar() {
                 placeholder="Search"
               />
             </li>
-            <li >
-            <Link className="text-white font-semibold text-lg" to='/auth/signin'>Login</Link>
-            
+            <li>
+              <Link
+                className="text-white font-semibold text-lg"
+                to="/auth/signin"
+              >
+                Login
+              </Link>
             </li>
           </ul>
         </div>
