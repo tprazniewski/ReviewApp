@@ -11,6 +11,18 @@ import { useNavigate } from "react-router-dom";
 
 const OTP_LENGTH = 6;
 let currentOTPIndex;
+
+const isValidOTP = (otp ) => {
+  let valid = false
+
+  for(let val of otp){
+    valid = !isNaN(parseInt(val))
+    if(!valid) break
+  }
+
+  return valid
+}
+
 export default function EmailVerification() {
   const [otp, setOtp] = useState(new Array(OTP_LENGTH).fill(""));
   const [activeOtpIndex, setActiveOtpIndex] =useState(0)
@@ -62,16 +74,22 @@ export default function EmailVerification() {
 console.log('inputRef!',inputRef)
 
 
-  useEffect(() => {
-    if(!user) navigate('/not-Found') 
-  },[user])
+  // useEffect(() => {
+  //   if(!user) navigate('/not-Found') 
+  // },[user])
 // if (!user) return null
+
+ const handleSubmit = e =>{
+  e.preventDefault()
+  if(!isValidOTP(otp)) return console.log('invalid otp')
+  console.log('is Valid otp:',otp)
+ }
   return (
 
     // <div className="fixed inset-0 bg-primary -z-10 flex justify-center items-center">
     <FormContainer>
       <Container>
-        <form className={commonModalClasses}>
+        <form onSubmit={handleSubmit} className={commonModalClasses}>
           <div>
             <Title> Please enter the OTP to verify your account</Title>
             <p className="text-center dark:text-dark-subtle text-light-subtle">
@@ -95,7 +113,7 @@ console.log('inputRef!',inputRef)
               );
             })}
           </div>
-          <Submit value="Send Link"></Submit>
+          <Submit value="Verify Account"></Submit>
         </form>
       </Container>
     </FormContainer>
