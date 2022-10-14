@@ -37,7 +37,14 @@ const create = async (req, res) => {
         <h1> ${OTP} </h1>
         `
       })
-    res.status(201).json({message: "please verify your email. OTP has been sent"})
+    // res.status(201).json({message: "please verify your email. OTP has been sent"})
+    res.status(201).json({
+      user: {
+        id: newUser._id,
+        name: newUser.name,
+        email: newUser.email
+      }
+    })
 } 
 
 const verifyEmail = async (req, res) => {

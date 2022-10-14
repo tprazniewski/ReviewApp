@@ -6,6 +6,7 @@ import Submit from "../form/Submit";
 import CustomLink from "../CustomLink";
 import { commonModalClasses } from "../../utils/theme";
 import FormContainer from "../form/FormContainer";
+import { createUser } from "../../api/auth";
 
 
 const validateUserInfo = ({name,email,password}) =>{
@@ -38,14 +39,17 @@ export default function Signup() {
     setUserInfo({...userInfo, [name]: value})
   }
 
-  const handleSubmit = (e)=> {
+  const handleSubmit = async (e)=> {
     e.preventDefault()
     // console.log(userInfo)
     const {message, error} = validateUserInfo(userInfo)
 
     if(!message) return console.log(error)
 
-    console.log(userInfo)
+    // console.log(userInfo)
+   const res = await createUser(userInfo)
+   if(res.error) return console.log(res.error)
+   console.log(res.user)
   }
 
   return (
