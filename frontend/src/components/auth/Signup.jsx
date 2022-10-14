@@ -7,19 +7,25 @@ import CustomLink from "../CustomLink";
 import { commonModalClasses } from "../../utils/theme";
 import FormContainer from "../form/FormContainer";
 import { createUser } from "../../api/auth";
+import { useNavigate } from "react-router-dom";
 
+const validateUserInfo = ({ name, email, password }) => {
+  if (!name.trim()) return { message: false, error: "name is missing" };
+  if (/^[a-z A-Z]+$/.test(name))
+    return { message: false, error: "Invalid Name" };
 
-const validateUserInfo = ({name,email,password}) =>{
-  if(!name.trim()) return {message: false, error: "name is missing"}
-  if(/^[a-z A-Z]+$/.test(name)) return {message: false, error: "Invalid Name"}
+  if (!email.trim()) return { message: false, error: "email is missing" };
 
-  if(!email.trim()) return  {message: false, error: "email is missing"}
+  if (!password.trim())
+    return { message: false, error: " password is missing" };
+  if (password.length < 8)
+    return {
+      message: false,
+      error: "password must be greater than 8 characters long",
+    };
 
-  if(!password.trim()) return {message: false , error: " password is missing"}
-  if(password.length < 8) return {message: false , error: "password must be greater than 8 characters long"}
-
-  return {message: true}
-}
+  return { message: true };
+};
 
 export default function Signup() {
   const [userInfo, setUserInfo] = useState({
@@ -27,30 +33,35 @@ export default function Signup() {
     email: "",
     password: "",
   });
-
+  const navigate = useNavigate();
   const { name, email, password } = userInfo;
 
   // const handleChange = (e)=>{
   //   e.target
   // }
-  const handleChange = ({target})=>{
+  const handleChange = ({ target }) => {
     // console.log(target.value, target.name)
-    const {value,name} = target
-    setUserInfo({...userInfo, [name]: value})
-  }
+    const { value, name } = target;
+    setUserInfo({ ...userInfo, [name]: value });
+  };
 
-  const handleSubmit = async (e)=> {
-    e.preventDefault()
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     // console.log(userInfo)
-    const {message, error} = validateUserInfo(userInfo)
+    const { message, error } = validateUserInfo(userInfo);
 
-    if(!message) return console.log(error)
+    if (!message) return console.log(error);
 
     // console.log(userInfo)
-   const res = await createUser(userInfo)
-   if(res.error) return console.log(res.error)
-   console.log(res.user)
-  }
+    const res = await createUser(userInfo);
+    if (res.error) return console.log(res.error);
+    navigate("/auth/verification", {
+      state: { user: res.user },
+      //can't go to the previous screen
+      replace: true,
+    });
+    //  console.log(res.user)
+  };
 
   return (
     // <div className='fixed inset-0 dark:bg-primary bg-white -z-10 flex justify-center items-center'>

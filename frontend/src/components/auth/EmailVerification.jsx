@@ -6,7 +6,8 @@ import Title from "../form/Title";
 import Submit from "../form/Submit";
 import FormContainer from "../form/FormContainer";
 import { commonModalClasses } from "../../utils/theme";
-
+import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const OTP_LENGTH = 6;
 let currentOTPIndex;
@@ -15,6 +16,10 @@ export default function EmailVerification() {
   const [activeOtpIndex, setActiveOtpIndex] =useState(0)
 
   const inputRef = useRef()
+  const {state} = useLocation()
+  const user= state?.user
+  const navigate = useNavigate()
+
   const focusNextInputField = index =>setActiveOtpIndex(index+1)
   const focusPreviousInputField = index =>{
     let nexIndex;
@@ -56,6 +61,11 @@ export default function EmailVerification() {
 
 console.log('inputRef!',inputRef)
 
+
+  useEffect(() => {
+    if(!user) navigate('/not-Found') 
+  },[user])
+// if (!user) return null
   return (
 
     // <div className="fixed inset-0 bg-primary -z-10 flex justify-center items-center">
