@@ -49,7 +49,9 @@ const create = async (req, res) => {
 
 const verifyEmail = async (req, res) => {
      const {userId, OTP} = req.body;
-
+    console.log(userId)
+    console.log(OTP)
+    
     //  if(!isValidObjectId(userId)) return res.json({ error: 'invalid user'});
      if(!isValidObjectId(userId)) return sendError(res, 'invalid user')
 
